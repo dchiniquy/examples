@@ -1,0 +1,5 @@
+docker build . -t dchiniquy/hellok8s:v1
+
+docker push dchiniquy/hellok8s:v1
+
+kubectl apply -f deployment.yaml
