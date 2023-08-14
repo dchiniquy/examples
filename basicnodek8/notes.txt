@@ -1,0 +1,21 @@
+kubectl apply -f nginx.yaml
+
+kubectl port-forward nginx 3001:80
+
+kubectl port-forward --address 0.0.0.0 nginx 3001:80
+
+nohup kubectl port-forward --address 0.0.0.0 nginx 3001:80 > /dev/null 2>&1 &
+
+kubectl logs --follow nginx
+
+kubectl exec nginx -- ls
+
+kubectl exec -it nginx -- sh
+
+echo "it works!" > /usr/share/nginx/html/index.html
+
+kubectl delete pod nginx
+
+kubectl delete -f nginx.yaml
+
+kubectl get pods
