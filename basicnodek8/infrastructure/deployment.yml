@@ -13,5 +13,5 @@ spec:
         app: hellok8s
     spec:
       containers:
-      - image: dchiniquy/kube-node:1.0
+      - image: dchiniquy/kube-node:2.0
         name: hellok8s-container
