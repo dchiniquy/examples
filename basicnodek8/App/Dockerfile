@@ -9,5 +9,7 @@ RUN cd /src; npm install
 # Document the port the app listens on
 EXPOSE 8080
 
+ENV MESSAGE='default'
+
 # Run this command (starts the app) when the container starts
 CMD cd /src && node ./app.js
