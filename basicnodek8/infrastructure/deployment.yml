@@ -1,4 +1,13 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hellok8s-config
+data:
+  MESSAGE: "It works with a ConfigMap!"
+
+---
+
+apiVersion: v1
 kind: Service
 metadata:
   name: hellok8s-svc
@@ -28,6 +37,6 @@ spec:
       containers:
       - image: dchiniquy/kube-node:v4
         name: hellok8s-container
-        env: 
-          - name: MESSAGE
-            value: "It Works!"
+        envFrom:
+          - configMapRef:
+              name: hellok8s-config
