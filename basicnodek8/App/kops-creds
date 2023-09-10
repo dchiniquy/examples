@@ -1,0 +1,27 @@
+{
+    "Group": {
+        "Path": "/",
+        "GroupName": "kops",
+        "GroupId": "AGPASEO72PSUVLWL4KEOH",
+        "Arn": "arn:aws:iam::147035159721:group/kops",
+        "CreateDate": "2023-08-17T16:38:51Z"
+    }
+}
+{
+    "User": {
+        "Path": "/",
+        "UserName": "kops",
+        "UserId": "AIDASEO72PSU6ZE465RAY",
+        "Arn": "arn:aws:iam::147035159721:user/kops",
+        "CreateDate": "2023-08-17T16:38:57Z"
+    }
+}
+{
+    "AccessKey": {
+        "UserName": "kops",
+        "AccessKeyId": "AKIASEO72PSU2PW5546C",
+        "Status": "Active",
+        "SecretAccessKey": "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",
+        "CreateDate": "2023-08-17T16:38:58Z"
+    }
+}

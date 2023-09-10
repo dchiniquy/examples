@@ -1,0 +1,7 @@
+docker build . -t dchiniquy/hellok8s:v1
+
+docker push dchiniquy/hellok8s:v1
+
+kubectl apply -f deployment.yaml
+
+nohup kubectl port-forward --address 0.0.0.0 hellok8s-744847789b-gbn55 8080:8080 > /dev/null 2>&1 &

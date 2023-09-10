@@ -1,0 +1,56 @@
+aws ec2 describe-availability-zones \
+    --profile kops \
+    --region $AWS_DEFAULT_REGION
+
+export ZONES=$(aws ec2 \
+    describe-availability-zones \
+    --profile kops \
+    --region $AWS_DEFAULT_REGION \
+    | jq -r \
+    '.AvailabilityZones[].ZoneName' \
+    | tr '\n' ',' | tr -d ' ')
+
+ZONES=${ZONES%?}
+
+echo $ZONES
+
+aws ec2 create-key-pair \
+    --profile kops \
+    --key-name devops23 \
+    | jq -r '.KeyMaterial' \
+    >devops23.pem
+
+export NAME=devops23.k8s.local
+
+export BUCKET_NAME=devops23-$(date +%s)
+
+aws s3api create-bucket \
+    --profile kops \
+    --bucket $BUCKET_NAME \
+    --create-bucket-configuration \
+    LocationConstraint=$AWS_DEFAULT_REGION
+
+    {
+    "Location": "http://devops23-1692295585.s3.amazonaws.com/"
+}
+
+export KOPS_STATE_STORE=s3://$BUCKET_NAME
+
+kops update cluster \
+    --name devops23.k8s.local \
+    --kubernetes-version v1.25 
+
+kops create cluster \
+    --name devops23.k8s.local \
+    --master-count 3 \
+    --node-count 1 \
+    --node-size t2.small \
+    --master-size t2.small \
+    --zones $ZONES \
+    --master-zones $ZONES \
+    --ssh-public-key devops23.pub \
+    --networking kubenet \
+    --kubernetes-version v1.25.12 \
+    --yes
+
+
